@@ -1,15 +1,16 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Pages/addtaskpage.dart';
-import 'package:flutter_application_1/Pages/taskDetail.dart';
-import 'package:flutter_application_1/Widgets/button.dart';
-import 'package:flutter_application_1/Widgets/taskcontainer.dart';
-import 'package:flutter_application_1/controllers/taskcontroller.dart';
-import 'package:flutter_application_1/themeData.dart';
+import 'package:todoapp/Pages/addTaskpage.dart';
+import 'package:todoapp/Pages/allTaskspage.dart';
+import 'package:todoapp/Pages/taskDetail.dart';
+import 'package:todoapp/Widgets/button.dart';
+import 'package:todoapp/Widgets/taskContainer.dart';
+import 'package:todoapp/controllers/TaskController.dart';
+import 'package:todoapp/themeData.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_application_1/models/taskmodel.dart';
+import 'package:todoapp/models/TaskModel.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,15 +29,41 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _addTaskBar(),
-          _addDateBar(),
-          _showTasks(),
+          addTaskBar(),
+          addDateBar(),
+          showTasks(),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor:
+            Color.fromARGB(255, 9, 1, 64), // Set the background color
+        selectedItemColor:
+            Color.fromARGB(255, 121, 114, 241), // Color of the selected item
+        unselectedItemColor: Colors.white, // Color of unselected items
+        currentIndex: 0,
+        onTap: (index) {
+          if (index == 1) {
+            Get.to(AllTasksPage());
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_today,
+              color: Color.fromARGB(255, 121, 114, 241),
+            ),
+            label: 'Today',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: 'All Tasks',
+          ),
         ],
       ),
     );
   }
 
-  _addTaskBar() {
+  Widget addTaskBar() {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
       child: Row(
@@ -63,7 +90,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _addDateBar() {
+  Widget addDateBar() {
     return Container(
       margin: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
       child: DatePicker(
@@ -86,19 +113,26 @@ class _HomePageState extends State<HomePage> {
               fontSize: 14, fontWeight: FontWeight.w600, color: Colors.grey),
         ),
         onDateChange: (date) {
-          _selectedDate = date;
+          setState(() {
+            _selectedDate = date;
+          });
         },
       ),
     );
   }
 
-  _showTasks() {
+  Widget showTasks() {
     return Expanded(
       child: Obx(() {
+        var filteredTasks = taskController.taskList.where((task) =>
+            task.date.year == _selectedDate.year &&
+            task.date.month == _selectedDate.month &&
+            task.date.day == _selectedDate.day);
+
         return ListView.builder(
-          itemCount: taskController.taskList.length,
+          itemCount: filteredTasks.length,
           itemBuilder: (context, index) {
-            Task task = taskController.taskList[index];
+            Task task = filteredTasks.elementAt(index);
             return GestureDetector(
               onTap: () => Get.to(TaskDetailPage(task: task)),
               child: TaskContainer(task: task),

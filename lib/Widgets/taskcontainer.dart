@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/models/taskmodel.dart';
+import 'package:todoapp/models/TaskModel.dart';
+
 import 'package:intl/intl.dart';
 
 class TaskContainer extends StatelessWidget {
@@ -9,9 +10,11 @@ class TaskContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool completed = task.isCompleted;
+
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 50, 54, 112),
         borderRadius: BorderRadius.circular(12),
@@ -32,29 +35,29 @@ class TaskContainer extends StatelessWidget {
               children: [
                 Text(
                   task.title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Text(
                   task.note,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 16,
                   ),
                 ),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 Row(
                   children: [
                     const Icon(Icons.access_time_filled_rounded,
                         color: Color.fromARGB(255, 187, 200, 248)),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
                       " ${task.startTime} - ${task.endTime}",
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 14,
                       ),
@@ -69,11 +72,16 @@ class TaskContainer extends StatelessWidget {
             children: [
               Text(
                 DateFormat.yMMMd().format(task.date),
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.white70,
                   fontSize: 14,
                 ),
               ),
+              if (completed)
+                const Icon(
+                  Icons.check_circle,
+                  color: Colors.green,
+                ),
             ],
           ),
         ],

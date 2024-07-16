@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/Pages/homepage.dart';
+import 'package:todoapp/Pages/homepage.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -19,7 +19,7 @@ class WelcomePage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height / 1.6,
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 235, 239, 251),
+                    color: Colors.white,
                   ),
                 ),
                 Container(
@@ -56,7 +56,7 @@ class WelcomePage extends StatelessWidget {
                 height: MediaQuery.of(context).size.height / 2.666,
                 padding: EdgeInsets.only(top: 40, bottom: 30),
                 decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 235, 239, 251),
+                    color: Colors.white,
                     borderRadius:
                         BorderRadius.only(topLeft: Radius.circular(50))),
                 child: Column(
@@ -76,7 +76,7 @@ class WelcomePage extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40),
                       child: Text(
-                        "Welcome to DailyPlanner! Organize tasks and achieve goals effortlessly. Stay focused and never miss a deadline. Let's plan your day and make every moment count!",
+                        "Welcome to DailyPlanner! Organize Tasks and achieve goals effortlessly. Stay focused and never miss a deadline. Let's plan your day and make every moment count!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 12,

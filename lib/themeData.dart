@@ -15,7 +15,7 @@ TextStyle get headingStyle {
       textStyle: const TextStyle(
           fontSize: 35,
           fontWeight: FontWeight.bold,
-          color: Color.fromARGB(255, 26, 25, 117)));
+          color: Color.fromARGB(255, 8, 8, 97)));
 }
 
 TextStyle get titleStyle {
@@ -31,4 +31,13 @@ TextStyle get subtitleStyle {
   return GoogleFonts.lato(
       textStyle: const TextStyle(
           fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey));
+}
+
+Widget getIcon(IconData icon) {
+  return Icon(icon, color: Color.fromARGB(255, 50, 54, 112));
+}
+
+TextStyle get fontStyle {
+  return GoogleFonts.lato(
+      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold));
 }
